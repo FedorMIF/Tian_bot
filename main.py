@@ -18,6 +18,8 @@ list_commands = ['/help: Список всех комманд;', '/menu: Мен�
 
 what_yn_com = 0
 
+bro = [445894340, 339512152]
+
 def printlist(list_commands):
     l = len(list_commands)
     i = 0
@@ -50,6 +52,8 @@ def com_text(mess):
     if 'привет' in mess.text.lower():
         name = bd.give_user_name(mess.from_user.id)
         bot.send_message(mess.from_user.id, f'Привет, {name}!')
+        if mess.from_user.id in bro:
+            bot.send_message(mess.from_user.id, f'Салам, братьям админа')
 
         #else: 
             #bot.send_message(mess.from_user.id, 'Привет, ' + name)
@@ -106,6 +110,12 @@ def com_text(mess):
 
     else:
         err('wtf', mess)
+
+
+####################
+
+def add_notification(id, mess):
+    bd.add_new_rasp(id, mess)
 
 def get_name(mess):
     ch = bd.add_new_user(mess.from_user.id, mess.text)
